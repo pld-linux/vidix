@@ -1,0 +1,42 @@
+diff -uNr vidix/libdha/Makefile vidix.built/libdha/Makefile
+--- vidix/libdha/Makefile	2003-02-11 17:04:35.000000000 +0100
++++ vidix.built/libdha/Makefile	2004-02-21 15:46:31.000000000 +0100
+@@ -54,9 +54,9 @@
+ 	$(CC) -MM $(CFLAGS) $(SRCS) 1>.depend
+ 
+ install:
+-	install -D -m 755 -s -p $(LIBNAME) $(prefix)/lib/$(LIBNAME)
+-	rm -f $(prefix)/lib/libdha.so
+-	ln -sf $(LIBNAME) $(prefix)/lib/libdha.so
++	install -D -m 755 -s -p $(LIBNAME) $(DESTDIR)/$(prefix)/lib/$(LIBNAME)
++	rm -f $(DESTDIR)/$(prefix)/lib/libdha.so
++	ln -sf $(LIBNAME) $(DESTDIR)/$(prefix)/lib/libdha.so
+ ifeq ($(TARGET_OS),OpenBSD)
+ 	$(LDCONFIG) -R
+ else
+diff -uNr vidix/vidix/drivers/Makefile vidix.built/vidix/drivers/Makefile
+--- vidix/vidix/drivers/Makefile	2004-01-10 19:25:36.000000000 +0100
++++ vidix.built/vidix/drivers/Makefile	2004-02-21 15:53:59.000000000 +0100
+@@ -2,8 +2,8 @@
+ 
+ include ../../config.mak
+ 
+-BINDIR = $(prefix)/lib/vidix
+-OLDBINDIR = $(prefix)/lib/mplayerxp/vidix
++BINDIR = $(DESTDIR)/$(prefix)/lib/vidix
++OLDBINDIR = $(DESTDIR)/$(prefix)/lib/mplayerxp/vidix
+ 
+ RADEON_VID=radeon_vid.so
+ RADEON_SRCS=radeon_vid.c
+diff -uNr vidix/vidix/Makefile vidix.built/vidix/Makefile
+--- vidix/vidix/Makefile	2002-06-05 09:36:59.000000000 +0200
++++ vidix.built/vidix/Makefile	2004-02-21 15:53:19.000000000 +0100
+@@ -1,6 +1,6 @@
+ LIBNAME = libvidix.so
+-BINDIR = $(prefix)/lib
+-INCDIR = $(prefix)/include/vidix
++BINDIR = $(DESTDIR)/$(prefix)/lib
++INCDIR = $(DESTDIR)/$(prefix)/include/vidix
+ SUBDIRS = drivers
+ DO_MAKE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit; done
+ 
