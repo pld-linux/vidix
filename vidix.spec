@@ -2,7 +2,7 @@
 %define		_snap	20040222
 
 Summary:	VIDIX is VIDeo Interface for *niX
-Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla uniksów
+Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
 Version:	0.%{_snap}.1
 Release:	1
