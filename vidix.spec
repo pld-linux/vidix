@@ -1,16 +1,13 @@
-
-%define		_snap	20040222
-
 Summary:	VIDIX is VIDeo Interface for *niX
 Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
-Version:	0.%{_snap}.1
-Release:	1
+Version:	0.9.9
+Release:	0.1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
-Source0:	%{name}-snap%{_snap}.tar.bz2
-# Source0-md5:	27b4175c4decf5e565fc26756426471e
+Source0:	http://dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
+# Source0-md5:	cd78f5259f809c24558f2cb5821383f4
 Patch0:		%{name}-Makefile.patch
 URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
@@ -45,7 +42,7 @@ Ten pakiet zawiera pliki nag³ówkowe, których mo¿na u¿yæ do tworzenia
 aplikacji korzystaj±cych z libvidix.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 %patch0 -p1
 
 %build
