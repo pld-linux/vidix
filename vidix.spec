@@ -1,5 +1,5 @@
 
-%define		_snap	20040221
+%define		_snap	20040222
 
 Summary:	VIDIX is VIDeo Interface for *niX
 Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla uniksów
@@ -10,9 +10,8 @@ Epoch:		1
 License:	GPL v2
 Group:		Libraries
 Source0:	%{name}-snap%{_snap}.tar.bz2
-# Source0-md5:	91939633ec7390529817def44c541d91
+# Source0-md5:	27b4175c4decf5e565fc26756426471e
 Patch0:		%{name}-Makefile.patch
-Patch1:		%{name}-sources.patch
 URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
 BuildRequires:	sed >= 4.0
@@ -32,7 +31,7 @@ i wprowadzony jako interfejs do dzia³aj±cych w przestrzeni u¿ytkownika
 sterowników udostêpniaj±cych DGA wszêdzie gdzie jest to mo¿liwe.
 
 %package devel
-Summary:	Headers files for libvidix
+Summary:	Header files for libvidix
 Summary(pl):	Pliki nag³ówkowe libvidix
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
@@ -48,7 +47,6 @@ aplikacji korzystaj±cych z libvidix.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
-%patch1 -p1
 
 %build
 # configure doesn't accept --libdir, but takes _libdir from env
