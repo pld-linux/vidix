@@ -14,7 +14,10 @@ Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-sources.patch
 URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
+Provides:	libdha.so
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_noautoreqdep	libdha.so
 
 %description
 VIDIX is portable interface which was designed and introduced as
@@ -51,6 +54,9 @@ install -d \
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
