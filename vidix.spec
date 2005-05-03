@@ -6,7 +6,7 @@ Release:	0.1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/sourceforge/vidix/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/vidix/%{name}-%{version}.tar.bz2
 # Source0-md5:	10424595de1bff4e468e33c37ea808ed
 Patch0:		%{name}-Makefile.patch
 URL:		http://vidix.sourceforge.net/
