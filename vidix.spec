@@ -1,13 +1,13 @@
 Summary:	VIDIX is VIDeo Interface for *niX
 Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
-Version:	0.9.9.1
+Version:	0.9.9.2
 Release:	0.1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/vidix/%{name}-%{version}.tar.bz2
-# Source0-md5:	10424595de1bff4e468e33c37ea808ed
+# Source0-md5:	7e4fe7e1531fa7264b346ad5a01ba1e3
 Patch0:		%{name}-Makefile.patch
 URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
@@ -53,7 +53,8 @@ _libdir="%{_libdir}/vidix" \
 	--prefix=%{_prefix} \
 	--datadir=%{_datadir}
 sed -i -e "s:OPTFLAGS =.*:OPTFLAGS=%{rpmcflags}:" config.mak
-%{__make}
+%{__make} \
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
