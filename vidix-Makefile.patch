@@ -14,9 +14,8 @@ diff -uNr vidix/libdha/Makefile vidix.built/libdha/Makefile
  ifeq ($(TARGET_OS),OpenBSD)
  	$(LDCONFIG) -R
  else
-diff -uNr vidix/vidix/drivers/Makefile vidix.built/vidix/drivers/Makefile
---- vidix/vidix/drivers/Makefile	2004-01-10 19:25:36.000000000 +0100
-+++ vidix.built/vidix/drivers/Makefile	2004-02-21 15:53:59.000000000 +0100
+--- vidix-0.9.9.2/vidix/drivers/Makefile.orig	2005-04-27 08:09:49.000000000 +0200
++++ vidix-0.9.9.2/vidix/drivers/Makefile	2006-11-19 00:28:04.646229750 +0100
 @@ -2,8 +2,8 @@
  
  include ../../config.mak
@@ -25,14 +24,15 @@ diff -uNr vidix/vidix/drivers/Makefile vidix.built/vidix/drivers/Makefile
 -OLDBINDIR = $(prefix)/lib/mplayerxp/vidix
 +BINDIR = $(DESTDIR)$(LIBDIR)
 +OLDBINDIR = $(DESTDIR)$(libdir)/mplayerxp/vidix
- 
- RADEON_VID=radeon_vid.so
- RADEON_SRCS=radeon_vid.c
-diff -uNr vidix/vidix/Makefile vidix.built/vidix/Makefile
---- vidix/vidix/Makefile	2002-06-05 09:36:59.000000000 +0200
-+++ vidix.built/vidix/Makefile	2004-02-21 15:53:19.000000000 +0100
-@@ -1,6 +1,6 @@
+ ifeq ($(TARGET_OS),CYGWIN)
+ L_FLAGS=
+ LINKER=$(CC)
+--- vidix-0.9.9.2/vidix/Makefile.orig	2005-06-28 17:20:32.000000000 +0200
++++ vidix-0.9.9.2/vidix/Makefile	2006-11-19 00:28:24.303458250 +0100
+@@ -5,8 +5,8 @@
+ else
  LIBNAME = libvidix.so
+ endif
 -BINDIR = $(prefix)/lib
 -INCDIR = $(prefix)/include/vidix
 +BINDIR = $(DESTDIR)$(libdir)
