@@ -2,7 +2,7 @@ Summary:	VIDIX is VIDeo Interface for *niX
 Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
 Version:	0.9.9.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
@@ -13,6 +13,8 @@ URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
 BuildRequires:	sed >= 4.0
 Provides:	libdha.so
+# build broken
+ExcludeArch:	ppc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libdha.so
