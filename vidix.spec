@@ -2,7 +2,7 @@ Summary:	VIDIX is VIDeo Interface for *niX
 Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
 Version:	0.9.9.2
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
