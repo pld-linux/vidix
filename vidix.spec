@@ -9,12 +9,11 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/vidix/%{name}-%{version}.tar.bz2
 # Source0-md5:	7e4fe7e1531fa7264b346ad5a01ba1e3
 Patch0:		%{name}-Makefile.patch
+Patch1:		%{name}-ppc.patch
 URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
 BuildRequires:	sed >= 4.0
 Provides:	libdha.so
-# build broken
-ExcludeArch:	ppc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libdha.so
@@ -46,6 +45,7 @@ aplikacji korzystaj±cych z libvidix.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 # configure doesn't accept --libdir, but takes _libdir from env
