@@ -2,7 +2,7 @@ Summary:	VIDIX is VIDeo Interface for *niX
 Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
 Version:	0.9.9.2
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
@@ -10,13 +10,11 @@ Source0:	http://dl.sourceforge.net/vidix/%{name}-%{version}.tar.bz2
 # Source0-md5:	7e4fe7e1531fa7264b346ad5a01ba1e3
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-ppc.patch
+Patch2:		%{name}-soname.patch
 URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
 BuildRequires:	sed >= 4.0
-Provides:	libdha.so
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreqdep	libdha.so
 
 %description
 VIDIX is portable interface which was designed and introduced as
@@ -46,6 +44,7 @@ aplikacji korzystaj±cych z libvidix.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 # configure doesn't accept --libdir, but takes _libdir from env
@@ -75,11 +74,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc NEWS vidix/README
-%attr(755,root,root) %{_libdir}/*.so
+%attr(755,root,root) %{_libdir}/libdha-*.so
+%attr(755,root,root) %{_libdir}/libvidix.so
 %dir %{_libdir}/vidix
 %attr(755,root,root) %{_libdir}/vidix/*.so
 
 %files devel
 %defattr(644,root,root,755)
 %doc vidix/vidix.txt
+%attr(755,root,root) %{_libdir}/libdha.so
 %{_includedir}/vidix
