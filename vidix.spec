@@ -1,5 +1,5 @@
 Summary:	VIDIX is VIDeo Interface for *niX
-Summary(pl.UTF-8):   VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
+Summary(pl.UTF-8):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
 Version:	0.9.9.3
 Release:	1
@@ -28,7 +28,7 @@ sterowników udostępniających DGA wszędzie gdzie jest to możliwe.
 
 %package devel
 Summary:	Header files for libvidix
-Summary(pl.UTF-8):   Pliki nagłówkowe libvidix
+Summary(pl.UTF-8):	Pliki nagłówkowe libvidix
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
