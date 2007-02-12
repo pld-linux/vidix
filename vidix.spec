@@ -1,5 +1,5 @@
 Summary:	VIDIX is VIDeo Interface for *niX
-Summary(pl):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
+Summary(pl.UTF-8):   VIDIX - VIDeo Interface for *niX - interfejs video dla UniksÃ³w
 Name:		vidix
 Version:	0.9.9.3
 Release:	1
@@ -21,14 +21,14 @@ VIDIX is portable interface which was designed and introduced as
 interface to userspace drivers to provide DGA everywhere where it's
 possible.
 
-%description -l pl
-VIDIX (VIDeo Interface for *niX) to przeno¶ny interfejs zaprojektowany
-i wprowadzony jako interfejs do dzia³aj±cych w przestrzeni u¿ytkownika
-sterowników udostêpniaj±cych DGA wszêdzie gdzie jest to mo¿liwe.
+%description -l pl.UTF-8
+VIDIX (VIDeo Interface for *niX) to przenoÅ›ny interfejs zaprojektowany
+i wprowadzony jako interfejs do dziaÅ‚ajÄ…cych w przestrzeni uÅ¼ytkownika
+sterownikÃ³w udostÄ™pniajÄ…cych DGA wszÄ™dzie gdzie jest to moÅ¼liwe.
 
 %package devel
 Summary:	Header files for libvidix
-Summary(pl):	Pliki nag³ówkowe libvidix
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe libvidix
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -36,9 +36,9 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package contains header files you can use to incorporate libvidix
 into applications.
 
-%description devel -l pl
-Ten pakiet zawiera pliki nag³ówkowe, których mo¿na u¿yæ do tworzenia
-aplikacji korzystaj±cych z libvidix.
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagÅ‚Ã³wkowe, ktÃ³rych moÅ¼na uÅ¼yÄ‡ do tworzenia
+aplikacji korzystajÄ…cych z libvidix.
 
 %prep
 %setup -q
