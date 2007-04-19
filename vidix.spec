@@ -1,16 +1,15 @@
 Summary:	VIDIX is VIDeo Interface for *niX
 Summary(pl.UTF-8):	VIDIX - VIDeo Interface for *niX - interfejs video dla Uniksów
 Name:		vidix
-Version:	0.9.9.3
+Version:	1.0.0
 Release:	1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/vidix/%{name}-%{version}.tar.bz2
-# Source0-md5:	bd204dd734c06451cda66e2eee620196
+# Source0-md5:	3471d1f385871f7e00e6e178ccdfff0b
 Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-ppc.patch
-Patch2:		%{name}-soname.patch
 URL:		http://vidix.sourceforge.net/
 BuildRequires:	mawk
 BuildRequires:	sed >= 4.0
@@ -44,7 +43,6 @@ aplikacji korzystających z libvidix.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 # configure doesn't accept --libdir, but takes _libdir from env
@@ -59,7 +57,6 @@ sed -i -e "s:OPTFLAGS =.*:OPTFLAGS=%{rpmcflags}:" config.mak
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir}/vidix,%{_includedir}/vidix}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -74,8 +71,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc NEWS vidix/README
-%attr(755,root,root) %{_libdir}/libdha-*.so
-%attr(755,root,root) %{_libdir}/libvidix.so
+%attr(755,root,root) %{_libdir}/libdha.so.*.*.*
+%attr(755,root,root) %{_libdir}/libvidix.so.*.*.*
 %dir %{_libdir}/vidix
 %attr(755,root,root) %{_libdir}/vidix/*.so
 
@@ -83,4 +80,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc vidix/vidix.txt
 %attr(755,root,root) %{_libdir}/libdha.so
+%attr(755,root,root) %{_libdir}/libvidix.so
 %{_includedir}/vidix
