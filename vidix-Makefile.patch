@@ -1,42 +1,89 @@
-diff -uNr vidix/libdha/Makefile vidix.built/libdha/Makefile
---- vidix/libdha/Makefile	2003-02-11 17:04:35.000000000 +0100
-+++ vidix.built/libdha/Makefile	2004-02-21 15:46:31.000000000 +0100
-@@ -54,9 +54,9 @@
+--- vidix-1.0.0/libdha/Makefile.orig	2007-04-07 08:08:23.000000000 +0200
++++ vidix-1.0.0/libdha/Makefile	2007-04-19 19:30:24.981089236 +0200
+@@ -82,15 +82,14 @@
  	$(CC) -MM $(CFLAGS) $(SRCS) 1>.depend
  
  install:
--	install -D -m 755 -s -p $(LIBNAME) $(prefix)/lib/$(LIBNAME)
--	rm -f $(prefix)/lib/libdha.so
--	ln -sf $(LIBNAME) $(prefix)/lib/libdha.so
-+	install -D -m 755 -p $(LIBNAME) $(DESTDIR)$(libdir)/$(LIBNAME)
-+	rm -f $(DESTDIR)$(libdir)/libdha.so
-+	ln -sf $(LIBNAME) $(DESTDIR)$(libdir)/libdha.so
- ifeq ($(TARGET_OS),OpenBSD)
- 	$(LDCONFIG) -R
- else
---- vidix-0.9.9.2/vidix/drivers/Makefile.orig	2005-04-27 08:09:49.000000000 +0200
-+++ vidix-0.9.9.2/vidix/drivers/Makefile	2006-11-19 00:28:04.646229750 +0100
-@@ -2,8 +2,8 @@
+-	-mkdir -p $(prefix)/lib
++	-mkdir -p $(DESTDIR)$(libdir)
+ ifeq ($(VIDIX_BUILD_SHARED),yes)
+-	install -D -m 755 -s -p $(LIBNAME_SHARED_VERSION) $(prefix)/lib/$(LIBNAME_SHARED_VERSION)
+-	ln -sf $(LIBNAME_SHARED_VERSION) $(prefix)/lib/$(LIBNAME_SHARED)
+-	ln -sf $(LIBNAME_SHARED_VERSION) $(prefix)/lib/$(LIBNAME_SHARED_MAJOR)
+-	-$(LDCONFIG) $(LDCONFIG_FLAGS)
++	install -D -m 755 -p $(LIBNAME_SHARED_VERSION) $(DESTDIR)$(libdir)/$(LIBNAME_SHARED_VERSION)
++	ln -sf $(LIBNAME_SHARED_VERSION) $(DESTDIR)$(libdir)/$(LIBNAME_SHARED)
++	ln -sf $(LIBNAME_SHARED_VERSION) $(DESTDIR)$(libdir)/$(LIBNAME_SHARED_MAJOR)
+ endif
+ ifeq ($(VIDIX_BUILD_STATIC),yes)
+-	cp -f $(LIBNAME_STATIC) $(prefix)/lib/$(LIBNAME_STATIC)
++	cp -f $(LIBNAME_STATIC) $(DESTDIR)$(libdir)/$(LIBNAME_STATIC)
+ endif
  
+ uninstall:
+--- vidix-1.0.0/vidix/Makefile.orig	2007-04-07 08:08:23.000000000 +0200
++++ vidix-1.0.0/vidix/Makefile	2007-04-19 19:31:41.453447147 +0200
+@@ -8,7 +8,7 @@
+ LIBNAME_STATIC         = $(NAME).a
+ LIBNAME_WIN32          = $(NAME).dll
+ 
+-LIBDIR = $(prefix)/lib
++LIBDIR = $(libdir)
+ INCDIR = $(prefix)/include/vidix
+ 
+ SRCS        = vidixlib.c
+@@ -68,21 +68,20 @@
+ 	$(MAKE) -C drivers depend
+ 
+ install:
+-	mkdir -p $(LIBDIR)
++	mkdir -p $(DESTDIR)$(LIBDIR)
+ ifeq ($(VIDIX_BUILD_SHARED),yes)
+-	install -m 755 -s -p $(LIBNAME_SHARED_VERSION) $(LIBDIR)
+-	ln -sf $(LIBNAME_SHARED_VERSION) $(prefix)/lib/$(LIBNAME_SHARED)
+-	ln -sf $(LIBNAME_SHARED_VERSION) $(prefix)/lib/$(LIBNAME_SHARED_MAJOR)
+-	-$(LDCONFIG) $(LDCONFIG_FLAGS)
++	install -m 755 -p $(LIBNAME_SHARED_VERSION) $(DESTDIR)$(LIBDIR)
++	ln -sf $(LIBNAME_SHARED_VERSION) $(DESTDIR)$(LIBDIR)/$(LIBNAME_SHARED)
++	ln -sf $(LIBNAME_SHARED_VERSION) $(DESTDIR)$(LIBDIR)/$(LIBNAME_SHARED_MAJOR)
+ endif
+ ifeq ($(VIDIX_BUILD_STATIC),yes)
+-	cp -f $(LIBNAME_STATIC) $(prefix)/lib
++	cp -f $(LIBNAME_STATIC) $(DESTDIR)$(LIBDIR)
+ endif
+ 
+-	mkdir -p $(INCDIR)
+-	install -m 644 fourcc.h $(INCDIR)
+-	install -m 644 vidix.h $(INCDIR)
+-	install -m 644 vidixlib.h $(INCDIR)
++	mkdir -p $(DESTDIR)$(INCDIR)
++	install -m 644 fourcc.h $(DESTDIR)$(INCDIR)
++	install -m 644 vidix.h $(DESTDIR)$(INCDIR)
++	install -m 644 vidixlib.h $(DESTDIR)$(INCDIR)
+ 
+ 	$(MAKE) -C drivers install
+ 
+--- vidix-1.0.0/vidix/drivers/Makefile.orig	2007-04-05 09:24:34.000000000 +0200
++++ vidix-1.0.0/vidix/drivers/Makefile	2007-04-19 19:32:20.899695061 +0200
+@@ -1,7 +1,7 @@
  include ../../config.mak
  
--BINDIR = $(prefix)/lib/vidix
--OLDBINDIR = $(prefix)/lib/mplayerxp/vidix
-+BINDIR = $(DESTDIR)$(LIBDIR)
-+OLDBINDIR = $(DESTDIR)$(libdir)/mplayerxp/vidix
- ifeq ($(TARGET_OS),CYGWIN)
- L_FLAGS=
- LINKER=$(CC)
---- vidix-0.9.9.2/vidix/Makefile.orig	2005-06-28 17:20:32.000000000 +0200
-+++ vidix-0.9.9.2/vidix/Makefile	2006-11-19 00:28:24.303458250 +0100
-@@ -5,8 +5,8 @@
- else
- LIBNAME = libvidix.so
- endif
--BINDIR = $(prefix)/lib
--INCDIR = $(prefix)/include/vidix
-+BINDIR = $(DESTDIR)$(libdir)
-+INCDIR = $(DESTDIR)$(prefix)/include/vidix
- SUBDIRS = drivers
- DO_MAKE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit; done
+-LIBDIR = $(prefix)/lib/vidix
+-OLDLIBDIR = $(prefix)/lib/mplayerxp/vidix
++LIBDIR = $(libdir)/vidix
++OLDLIBDIR = $(libdir)/mplayerxp/vidix
  
+ VIDIX_LIBS = -L../../libdha -ldha
+ VIDIX_LIBS_M = $(VIDIX_LIBS) -lm
+@@ -99,9 +99,8 @@
+ 	$(CC) -MM $(CFLAGS) $(SRCS) 1>.depend
+ 
+ install:
+-	mkdir -p $(LIBDIR)
+-	install -m 755 -p *.so $(LIBDIR)
+-	if test -d $(OLDLIBDIR) ; then rm -f $(OLDLIBDIR)/*.so ; rmdir -p --ignore-fail-on-non-empty $(OLDLIBDIR) ; fi
++	mkdir -p $(DESTDIR)$(LIBDIR)
++	install -m 755 -p *.so $(DESTDIR)$(LIBDIR)
+ 
+ uninstall:
+ 	rm -f $(LIBDIR)/*.so
