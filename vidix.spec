@@ -41,8 +41,8 @@ aplikacji korzystających z libvidix.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 # configure doesn't accept --libdir, but takes _libdir from env
